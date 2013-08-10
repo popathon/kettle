@@ -1,0 +1,10 @@
+{
+	"name": "popfrence",
+	"version": "0.0.1",
+	"author": "popathon - popfrence team",
+	"description": "ask us later",
+	"private": true,
+	"dependencies": {
+		"express": "3.x"
+	}
+}
