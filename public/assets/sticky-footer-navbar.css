@@ -1,58 +1,56 @@
-/* Sticky footer styles
--------------------------------------------------- */
+  /* Sticky footer styles
+      -------------------------------------------------- */
 
-html,
-body {
-  height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
-}
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
 
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Negative indent footer by its height */
-  margin: 0 auto -60px;
-  /* Pad bottom by footer height */
-  padding: 0 0 60px;
-}
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
 
-/* Set the fixed height of the footer here */
-#footer {
-  height: 60px;
-  background-color: #F24B0F;
-}
-.navbar{
-  background-color: #F24B0F;
-  font-size: 
-}
-body { padding-top: 60px; }
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+      #footer {
+        background-color: #F24B0F;
+      }
 
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-  #footer {
-    background-color: #F24B0F;
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
+      .navbar {
+        background-color: #F24B0F;
+      }
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
 
 
 
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
 
-#wrap > .container {
-  padding: 60px 15px 0;
-}
-.container .credit {
-  margin: 20px 0;
-}
+      #wrap > .container {
+        padding-top: 60px;
+      }
+      .container .credit {
+        margin: 20px 0;
+      }
 
-code {
-  font-size: 80%;
-}
+      code {
+        font-size: 80%;
+      }
