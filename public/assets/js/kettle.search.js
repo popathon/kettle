@@ -9,6 +9,7 @@ Kettle.extend(Kettle.prototype, {
 			.tags(searchTerm.split(/\s+/))
 			.description(searchTerm)
 			.sortByField('updatedAt', 'desc')
+			.content("application/x-popcorn")
 			.then(function(err, makes){
 				if(err){
 					// handle error
@@ -21,7 +22,11 @@ Kettle.extend(Kettle.prototype, {
 				self.playQueue = self.playQueue.concat(makes);
 
 				// stick the searchTerm into the playQueue for auto updating
-				self.playQueue.searchTerm = searchTerm;
+				Kettle.forEach(makes, function(make){
+					if (make.updatedAt > self.playQueue.mostRecentTime){
+						self.playQueue.mostRecentTime = make.updatedAt;
+					}
+				});
 
 				// callback
 				if(fn){
