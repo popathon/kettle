@@ -3,6 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>test kettle player</title>
+	<style>
+	#thumbs img {
+		max-height: 200px;
+		max-width: 200px;
+	}
+	</style>
 </head>
 <body>
 	<!-- critical scripts -->
@@ -14,10 +20,68 @@
 	<!-- optional components (critical for demo) -->
 	<script src="/assets/js/kettle.search.js"></script>
 
+	<iframe src="http://exmaple.com" id="player" width="640" height="403" frameborder="0"></iframe>
+	<div id="thumbs"></div>
+	
 	<script>
+		// create a kettle instance
 		var kettle = new Kettle();
-		
-		kettle.search("kittens", console.log);
-	</script>
-</body>
-</html>
+
+		// shortcuts to some elements
+		kettle.player = document.getElementById('player');
+		kettle.thumbs = document.getElementById('thumbs');
+
+		// hack to let us know which make we're on
+		var makeNum = 1,
+
+		// hack to load each video (no current support for end of video detection)
+		playFunc = function(){
+			if(makeNum < kettle.playQueue.length){
+				kettle.player.innerHTML = "";
+
+				kettle.player.src = kettle.playQueue[makeNum].url + "_?autoplay=1";
+				makeNum++;
+			}
+		};
+		playTimer = setInterval(playFunc, 30000); // notice the hack?
+
+		function getParameterByName(name) {
+			name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			results = regex.exec(location.search);
+			return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+
+		// run a search for ...
+		kettle.search(getParameterByName("q"), function(queue){
+			// create thumbs
+			Kettle.forEach(queue, function(make, i){
+				var img = document.createElement('img');
+				img.src = make.thumbnail;
+				img.title = make.title;
+				img.alt = make.title;
+				img.make = make;
+				img.makeNum = i;
+				img.addEventListener("mouseover", function(e){
+					kettle.player.src = this.make.url + "_?autoplay=1";
+					clearInterval(playTimer);
+					playTimer = setInterval(updateFunc, 30000);
+				});
+				img.addEventListener("click", function(){
+					kettle.playQueue.splice(this.remove().makeNum,1);
+				});
+				kettle.thumbs.appendChild(img);
+			});
+
+			// load first make
+			kettle.player.src = kettle.playQueue[0].url + "_?autoplay=1";
+
+			// start polling for updates
+			kettle.playQueue.prototype.startUpdate(kettle);
+
+			// let us know makes were found
+			console.log("makes found");
+		});
+		</script>
+	</body>
+	</html>

@@ -8,8 +8,8 @@ Kettle.extend(Kettle.prototype, {
 		makeAPI.or()
 			.tags(searchTerm.split(/\s+/))
 			.description(searchTerm)
-			.sortByField('updatedAt', 'desc')
-			.content("application/x-popcorn")
+			.sortByField('updatedAt', 'asc')
+			//.contentType("application/x-popcorn")
 			.then(function(err, makes){
 				if(err){
 					// handle error
@@ -19,22 +19,23 @@ Kettle.extend(Kettle.prototype, {
 
 
 				// dumb update (will likely cause duplicates)
-				self.playQueue = self.playQueue.concat(makes);
+				// self.playQueue = self.playQueue.concat(makes);
 
 				// stick the searchTerm into the playQueue for auto updating
 				Kettle.forEach(makes, function(make){
-					if (make.updatedAt > self.playQueue.mostRecentTime){
-						self.playQueue.mostRecentTime = make.updatedAt;
+					if (make.updatedAt > self.playQueue.prototype.mostRecentTime){
+						self.playQueue.prototype.mostRecentTime = make.updatedAt;
+						self.playQueue.push(make);
 					}
 				});
+
+				self.playQueue.prototype.searchTerm = searchTerm;
 
 				// callback
 				if(fn){
 					fn(self.playQueue);
+					return;
 				}
-
-				// For the sake of usability return the playQueue
-				return self.playQueue;
 			});
 	}
 });
