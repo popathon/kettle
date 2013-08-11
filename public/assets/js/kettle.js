@@ -13,7 +13,7 @@
 		};
 
 		// prevent lots of un-needed errors being caused
-		var methods = ().split(/\s+/);
+		var methods = ("").split(/\s+/);
 
 		while(methods.length){
 			window.Popcorn[methods.shift()] = function(){};
@@ -30,7 +30,7 @@
 	// Non-Public variable
 	// Our make api instance
 	var makeAPI = new window.Make({
-			apiURL: "http://makeapi.webmaker.org"
+			apiURL: "https://makeapi.webmaker.org"
 		});
 
 	// Declare constructor
@@ -94,4 +94,5 @@
 		});
 	};
 
+	window.Kettle = Kettle;
 })(this, this.document);

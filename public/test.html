@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>test kettle player</title>
+</head>
+<body>
+	<!-- critical scripts -->
+	<script src="/assets/js/popcorn.js"></script>
+	<script src="/assets/js/make-api.js"></script>
+	<script src="/assets/js/kettle.js"></script>
+	<script src="/assets/js/kettle.playQueue.js"></script>
+
+	<!-- optional components (critical for demo) -->
+	<script src="/assets/js/kettle.search.js"></script>
+
+	<script>
+		var kettle = new Kettle();
+		
+		kettle.search("kittens", console.log);
+	</script>
+</body>
+</html>
